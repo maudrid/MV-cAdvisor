@@ -22,7 +22,7 @@ Navigate to `http://localhost:3000`
 Log in with `test` / `test`  
 Then go to `explore`  
 Make sure to select `VM` as source.  
-Enter this query `count({job=~"cadvisor"}) by (instance)`  
+Enter this query `count({job="cadvisor"}) by (instance)`  
 Select `last 30 minutes` as time span.  
 Give it some time to accumulate data and note the following:
 * The graph is not stable.
