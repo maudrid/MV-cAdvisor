@@ -1,0 +1,104 @@
+configs:
+  prometheus:
+    file: ./prometheus.yml
+
+services:
+  cadvisorb:
+    command: 
+      - "--port=8081"
+      - "--housekeeping_interval=10s"
+      - "--docker_only=true"
+      - "--disable_metrics=percpu,sched,tcp,udp,disk,diskIO,hugetlb,referenced_memory,cpu_topology,resctrl"
+      - "--store_container_labels=false"
+    image: gcr.io/cadvisor/cadvisor:v0.47.1
+    devices:
+    - /dev/kmsg
+    privileged: true
+    volumes:
+      - "/:/rootfs:ro"
+      - "/var/run:/var/run:ro"
+      - "/sys:/sys:ro"
+      - "/var/lib/docker/:/var/lib/docker:ro"
+      - "/dev/disk/:/dev/disk:ro"
+    environment:
+       - CADVISOR_HEALTHCHECK_URL=http://localhost:8081/healthz
+    container_name: cadvisor
+    restart: unless-stopped
+
+  victoriametrics:
+    container_name: victoriametrics
+    image: victoriametrics/victoria-metrics:v1.91.0
+    ports:
+      - 8428:8428
+      - 8089:8089
+      - 8089:8089/udp
+      - 2003:2003
+      - 2003:2003/udp
+      - 4242:4242
+    volumes:
+      - ./vmdata:/storage
+    configs:
+      - source: prometheus
+        target: /etc/prometheus/prometheus.yml
+    command:
+      - "--storageDataPath=/storage"
+      - "--graphiteListenAddr=:2003"
+      - "--opentsdbListenAddr=:4242"
+      - "--httpListenAddr=:8428"
+      - "--influxListenAddr=:8089"
+      - "--promscrape.config=/etc/prometheus/prometheus.yml"
+      - "--search.disableCache"
+
+  prometheus:
+    container_name: prometheus
+    image: prom/prometheus:v2.43.0
+    restart: unless-stopped
+    user: root
+    healthcheck:
+      test: wget --tries=1 --no-verbose --spider http://localhost:9090/-/ready || exit 1
+      interval: 15s
+      start_period: 5m
+      timeout: 20s
+      retries: 3
+    configs:
+      - source: prometheus
+        target: /etc/prometheus/prometheus.yml
+    volumes:
+      - ./data:/prometheus
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+    command:
+      - "--config.file"
+      - "/etc/prometheus/prometheus.yml"
+      - "--storage.tsdb.path"
+      - "/prometheus"
+    ports:
+      - 9090:9090
+
+  grafana:
+    container_name: grafana
+    image: grafana/grafana:9.4.3
+    volumes:
+      - ./provisioning/dashboards.yml:/etc/grafana/provisioning/dashboards/dashboards.yml
+      - ./provisioning/sources.yml:/etc/grafana/provisioning/datasources/sources.yml
+      - ./provisioning/dashboards/:/etc/grafana/dashboards
+    healthcheck:
+      test: wget --tries=1 --no-verbose --spider http://localhost:3000/api/health || exit 1
+      interval: 30s
+      timeout: 10s
+      retries: 5
+      start_period: 5m
+    environment:
+      GF_SECURITY_ADMIN_PASSWORD: test
+      GF_SECURITY_ADMIN_USER: test
+      GF_SECURITY_ADMIN_EMAIL: test@test.test
+    restart: unless-stopped
+    ports:
+      - 3000:3000
+
+#! Some things to track data for
+  filler:
+    image: alpine:latest
+    command: tail -f
+    deploy:
+      mode: replicated
+      replicas: 10
