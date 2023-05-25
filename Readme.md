@@ -18,7 +18,8 @@ Select `last 30 minutes` as time span.
 Give it some time to accumulate data and note the following:
 * The graph is not stable.
 * Repeatedly clicking on `Run Query` changes the previously displayed graph values.
-Change the source and now select `Prometheus` instead and execute the query again.
+
+Change the source and now select `Prometheus` instead and execute the query again.  
 Note:
 * The graph is stable
 * Repeatedly clicking on `Run Query` does NOT chang the previously displayed graph values.
