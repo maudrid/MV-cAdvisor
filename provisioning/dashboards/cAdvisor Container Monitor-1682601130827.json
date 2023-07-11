@@ -32,7 +32,7 @@
   "panels": [
     {
       "collapsed": false,
-      "datasource": "Prometheus",
+      "datasource": "VM",
       "gridPos": {
         "h": 1,
         "w": 24,
@@ -43,7 +43,7 @@
       "panels": [],
       "targets": [
         {
-          "datasource": "Prometheus",
+          "datasource": "VM",
           "refId": "A"
         }
       ],
@@ -55,7 +55,7 @@
       "bars": false,
       "dashLength": 10,
       "dashes": false,
-      "datasource": "Prometheus",
+      "datasource": "VM",
       "decimals": 2,
       "editable": true,
       "error": false,
@@ -104,7 +104,7 @@
       "steppedLine": false,
       "targets": [
         {
-          "datasource": "Prometheus",
+          "datasource": "VM",
           "expr": "sum (rate (container_network_receive_bytes_total{kubernetes_io_hostname=~\"^$Node$\"}[1m]))",
           "interval": "10s",
           "intervalFactor": 1,
@@ -114,7 +114,7 @@
           "step": 10
         },
         {
-          "datasource": "Prometheus",
+          "datasource": "VM",
           "expr": "- sum (rate (container_network_transmit_bytes_total{kubernetes_io_hostname=~\"^$Node$\"}[1m]))",
           "interval": "10s",
           "intervalFactor": 1,
@@ -157,7 +157,7 @@
     },
     {
       "collapsed": false,
-      "datasource": "Prometheus",
+      "datasource": "VM",
       "gridPos": {
         "h": 1,
         "w": 24,
@@ -168,7 +168,7 @@
       "panels": [],
       "targets": [
         {
-          "datasource": "Prometheus",
+          "datasource": "VM",
           "refId": "A"
         }
       ],
@@ -176,7 +176,7 @@
       "type": "row"
     },
     {
-      "datasource": "Prometheus",
+      "datasource": "VM",
       "fieldConfig": {
         "defaults": {
           "color": {
@@ -240,7 +240,7 @@
       "pluginVersion": "9.4.3",
       "targets": [
         {
-          "datasource": "Prometheus",
+          "datasource": "VM",
           "expr": "sum (container_memory_working_set_bytes{id=\"/\",kubernetes_io_hostname=~\"^$Node$\"}) / sum (machine_memory_bytes{kubernetes_io_hostname=~\"^$Node$\"}) * 100",
           "interval": "10s",
           "intervalFactor": 1,
@@ -252,7 +252,7 @@
       "type": "gauge"
     },
     {
-      "datasource": "Prometheus",
+      "datasource": "VM",
       "fieldConfig": {
         "defaults": {
           "color": {
@@ -317,7 +317,7 @@
       "pluginVersion": "9.4.3",
       "targets": [
         {
-          "datasource": "Prometheus",
+          "datasource": "VM",
           "expr": "sum (rate (container_cpu_usage_seconds_total{id=\"/\",kubernetes_io_hostname=~\"^$Node$\"}[1m])) / sum (machine_cpu_cores{kubernetes_io_hostname=~\"^$Node$\"}) * 100",
           "interval": "10s",
           "intervalFactor": 1,
@@ -329,7 +329,7 @@
       "type": "gauge"
     },
     {
-      "datasource": "Prometheus",
+      "datasource": "VM",
       "fieldConfig": {
         "defaults": {
           "color": {
@@ -394,7 +394,7 @@
       "pluginVersion": "9.4.3",
       "targets": [
         {
-          "datasource": "Prometheus",
+          "datasource": "VM",
           "expr": "sum (container_fs_usage_bytes{device=~\"^/dev/[sv]d[a-z][1-9]$\",id=\"/\",kubernetes_io_hostname=~\"^$Node$\"}) / sum (container_fs_limit_bytes{device=~\"^/dev/[sv]d[a-z][1-9]$\",id=\"/\",kubernetes_io_hostname=~\"^$Node$\"}) * 100",
           "interval": "10s",
           "intervalFactor": 1,
@@ -408,7 +408,7 @@
       "type": "gauge"
     },
     {
-      "datasource": "Prometheus",
+      "datasource": "VM",
       "fieldConfig": {
         "defaults": {
           "color": {
@@ -469,7 +469,7 @@
       "pluginVersion": "9.4.3",
       "targets": [
         {
-          "datasource": "Prometheus",
+          "datasource": "VM",
           "expr": "sum (container_memory_working_set_bytes{id=\"/\",kubernetes_io_hostname=~\"^$Node$\"})",
           "interval": "10s",
           "intervalFactor": 1,
@@ -481,7 +481,7 @@
       "type": "stat"
     },
     {
-      "datasource": "Prometheus",
+      "datasource": "VM",
       "fieldConfig": {
         "defaults": {
           "color": {
@@ -542,7 +542,7 @@
       "pluginVersion": "9.4.3",
       "targets": [
         {
-          "datasource": "Prometheus",
+          "datasource": "VM",
           "expr": "sum (machine_memory_bytes{kubernetes_io_hostname=~\"^$Node$\"})",
           "interval": "10s",
           "intervalFactor": 1,
@@ -554,7 +554,7 @@
       "type": "stat"
     },
     {
-      "datasource": "Prometheus",
+      "datasource": "VM",
       "fieldConfig": {
         "defaults": {
           "color": {
@@ -615,7 +615,7 @@
       "pluginVersion": "9.4.3",
       "targets": [
         {
-          "datasource": "Prometheus",
+          "datasource": "VM",
           "expr": "sum (rate (container_cpu_usage_seconds_total{id=\"/\",kubernetes_io_hostname=~\"^$Node$\"}[1m]))",
           "interval": "10s",
           "intervalFactor": 1,
@@ -627,7 +627,7 @@
       "type": "stat"
     },
     {
-      "datasource": "Prometheus",
+      "datasource": "VM",
       "fieldConfig": {
         "defaults": {
           "color": {
@@ -688,7 +688,7 @@
       "pluginVersion": "9.4.3",
       "targets": [
         {
-          "datasource": "Prometheus",
+          "datasource": "VM",
           "expr": "sum (machine_cpu_cores{kubernetes_io_hostname=~\"^$Node$\"})",
           "interval": "10s",
           "intervalFactor": 1,
@@ -700,7 +700,7 @@
       "type": "stat"
     },
     {
-      "datasource": "Prometheus",
+      "datasource": "VM",
       "fieldConfig": {
         "defaults": {
           "color": {
@@ -761,7 +761,7 @@
       "pluginVersion": "9.4.3",
       "targets": [
         {
-          "datasource": "Prometheus",
+          "datasource": "VM",
           "expr": "sum (container_fs_usage_bytes{device=~\"^/dev/[sv]d[a-z][1-9]$\",id=\"/\",kubernetes_io_hostname=~\"^$Node$\"})",
           "interval": "10s",
           "intervalFactor": 1,
@@ -773,7 +773,7 @@
       "type": "stat"
     },
     {
-      "datasource": "Prometheus",
+      "datasource": "VM",
       "fieldConfig": {
         "defaults": {
           "color": {
@@ -834,7 +834,7 @@
       "pluginVersion": "9.4.3",
       "targets": [
         {
-          "datasource": "Prometheus",
+          "datasource": "VM",
           "expr": "sum (container_fs_limit_bytes{device=~\"^/dev/[sv]d[a-z][1-9]$\",id=\"/\",kubernetes_io_hostname=~\"^$Node$\"})",
           "interval": "10s",
           "intervalFactor": 1,
@@ -847,7 +847,7 @@
     },
     {
       "collapsed": false,
-      "datasource": "Prometheus",
+      "datasource": "VM",
       "gridPos": {
         "h": 1,
         "w": 24,
@@ -858,7 +858,7 @@
       "panels": [],
       "targets": [
         {
-          "datasource": "Prometheus",
+          "datasource": "VM",
           "refId": "A"
         }
       ],
@@ -870,7 +870,7 @@
       "bars": false,
       "dashLength": 10,
       "dashes": false,
-      "datasource": "Prometheus",
+      "datasource": "VM",
       "decimals": 3,
       "editable": true,
       "error": false,
@@ -920,7 +920,7 @@
       "steppedLine": true,
       "targets": [
         {
-          "datasource": "Prometheus",
+          "datasource": "VM",
           "expr": "sum (rate (container_cpu_usage_seconds_total{image!=\"\",name=~\"^k8s_.*\",container_name!=\"POD\",kubernetes_io_hostname=~\"^$Node$\"}[1m])) by (container_name, pod_name)",
           "hide": false,
           "interval": "10s",
@@ -931,7 +931,7 @@
           "step": 10
         },
         {
-          "datasource": "Prometheus",
+          "datasource": "VM",
           "expr": "sum (rate (container_cpu_usage_seconds_total{image!=\"\",name!~\"^k8s_.*\",kubernetes_io_hostname=~\"^$Node$\"}[1m])) by (kubernetes_io_hostname, name, image)",
           "hide": false,
           "interval": "10s",
@@ -942,7 +942,7 @@
           "step": 10
         },
         {
-          "datasource": "Prometheus",
+          "datasource": "VM",
           "expr": "sum (rate (container_cpu_usage_seconds_total{rkt_container_name!=\"\",kubernetes_io_hostname=~\"^$Node$\"}[1m])) by (kubernetes_io_hostname, rkt_container_name)",
           "interval": "10s",
           "intervalFactor": 1,
@@ -986,7 +986,7 @@
     },
     {
       "collapsed": false,
-      "datasource": "Prometheus",
+      "datasource": "VM",
       "gridPos": {
         "h": 1,
         "w": 24,
@@ -997,7 +997,7 @@
       "panels": [],
       "targets": [
         {
-          "datasource": "Prometheus",
+          "datasource": "VM",
           "refId": "A"
         }
       ],
@@ -1009,7 +1009,7 @@
       "bars": false,
       "dashLength": 10,
       "dashes": false,
-      "datasource": "Prometheus",
+      "datasource": "VM",
       "decimals": 3,
       "editable": true,
       "error": false,
@@ -1056,7 +1056,7 @@
       "steppedLine": true,
       "targets": [
         {
-          "datasource": "Prometheus",
+          "datasource": "VM",
           "expr": "sum (rate (container_cpu_usage_seconds_total{id!=\"/\",kubernetes_io_hostname=~\"^$Node$\"}[1m])) by (id)",
           "hide": false,
           "interval": "10s",
@@ -1101,7 +1101,7 @@
     },
     {
       "collapsed": false,
-      "datasource": "Prometheus",
+      "datasource": "VM",
       "gridPos": {
         "h": 1,
         "w": 24,
@@ -1112,7 +1112,7 @@
       "panels": [],
       "targets": [
         {
-          "datasource": "Prometheus",
+          "datasource": "VM",
           "refId": "A"
         }
       ],
@@ -1124,7 +1124,7 @@
       "bars": false,
       "dashLength": 10,
       "dashes": false,
-      "datasource": "Prometheus",
+      "datasource": "VM",
       "decimals": 2,
       "editable": true,
       "error": false,
@@ -1172,7 +1172,7 @@
       "steppedLine": true,
       "targets": [
         {
-          "datasource": "Prometheus",
+          "datasource": "VM",
           "expr": "sum (container_memory_working_set_bytes{image!=\"\",name=~\"^k8s_.*\",container_name!=\"POD\",kubernetes_io_hostname=~\"^$Node$\"}) by (container_name, pod_name)",
           "interval": "10s",
           "intervalFactor": 1,
@@ -1182,7 +1182,7 @@
           "step": 10
         },
         {
-          "datasource": "Prometheus",
+          "datasource": "VM",
           "expr": "sum (container_memory_working_set_bytes{image!=\"\",name!~\"^k8s_.*\",kubernetes_io_hostname=~\"^$Node$\"}) by (kubernetes_io_hostname, name, image)",
           "interval": "10s",
           "intervalFactor": 1,
@@ -1192,7 +1192,7 @@
           "step": 10
         },
         {
-          "datasource": "Prometheus",
+          "datasource": "VM",
           "expr": "sum (container_memory_working_set_bytes{rkt_container_name!=\"\",kubernetes_io_hostname=~\"^$Node$\"}) by (kubernetes_io_hostname, rkt_container_name)",
           "interval": "10s",
           "intervalFactor": 1,
@@ -1235,7 +1235,7 @@
     },
     {
       "collapsed": false,
-      "datasource": "Prometheus",
+      "datasource": "VM",
       "gridPos": {
         "h": 1,
         "w": 24,
@@ -1246,7 +1246,7 @@
       "panels": [],
       "targets": [
         {
-          "datasource": "Prometheus",
+          "datasource": "VM",
           "refId": "A"
         }
       ],
@@ -1258,7 +1258,7 @@
       "bars": false,
       "dashLength": 10,
       "dashes": false,
-      "datasource": "Prometheus",
+      "datasource": "VM",
       "decimals": 2,
       "editable": true,
       "error": false,
@@ -1306,7 +1306,7 @@
       "steppedLine": true,
       "targets": [
         {
-          "datasource": "Prometheus",
+          "datasource": "VM",
           "expr": "sum (container_memory_working_set_bytes{id!=\"/\",kubernetes_io_hostname=~\"^$Node$\"}) by (id)",
           "interval": "10s",
           "intervalFactor": 1,
@@ -1349,7 +1349,7 @@
     },
     {
       "collapsed": false,
-      "datasource": "Prometheus",
+      "datasource": "VM",
       "gridPos": {
         "h": 1,
         "w": 24,
@@ -1360,7 +1360,7 @@
       "panels": [],
       "targets": [
         {
-          "datasource": "Prometheus",
+          "datasource": "VM",
           "refId": "A"
         }
       ],
@@ -1372,7 +1372,7 @@
       "bars": false,
       "dashLength": 10,
       "dashes": false,
-      "datasource": "Prometheus",
+      "datasource": "VM",
       "decimals": 2,
       "editable": true,
       "error": false,
@@ -1420,7 +1420,7 @@
       "steppedLine": false,
       "targets": [
         {
-          "datasource": "Prometheus",
+          "datasource": "VM",
           "expr": "sum (rate (container_network_receive_bytes_total{image!=\"\",name=~\"^k8s_.*\",kubernetes_io_hostname=~\"^$Node$\"}[1m])) by (container_name, pod_name)",
           "hide": false,
           "interval": "10s",
@@ -1431,7 +1431,7 @@
           "step": 10
         },
         {
-          "datasource": "Prometheus",
+          "datasource": "VM",
           "expr": "- sum (rate (container_network_transmit_bytes_total{image!=\"\",name=~\"^k8s_.*\",kubernetes_io_hostname=~\"^$Node$\"}[1m])) by (container_name, pod_name)",
           "hide": false,
           "interval": "10s",
@@ -1442,7 +1442,7 @@
           "step": 10
         },
         {
-          "datasource": "Prometheus",
+          "datasource": "VM",
           "expr": "sum (rate (container_network_receive_bytes_total{image!=\"\",name!~\"^k8s_.*\",kubernetes_io_hostname=~\"^$Node$\"}[1m])) by (kubernetes_io_hostname, name, image)",
           "hide": false,
           "interval": "10s",
@@ -1453,7 +1453,7 @@
           "step": 10
         },
         {
-          "datasource": "Prometheus",
+          "datasource": "VM",
           "expr": "- sum (rate (container_network_transmit_bytes_total{image!=\"\",name!~\"^k8s_.*\",kubernetes_io_hostname=~\"^$Node$\"}[1m])) by (kubernetes_io_hostname, name, image)",
           "hide": false,
           "interval": "10s",
@@ -1464,7 +1464,7 @@
           "step": 10
         },
         {
-          "datasource": "Prometheus",
+          "datasource": "VM",
           "expr": "sum (rate (container_network_transmit_bytes_total{rkt_container_name!=\"\",kubernetes_io_hostname=~\"^$Node$\"}[1m])) by (kubernetes_io_hostname, rkt_container_name)",
           "hide": false,
           "interval": "10s",
@@ -1475,7 +1475,7 @@
           "step": 10
         },
         {
-          "datasource": "Prometheus",
+          "datasource": "VM",
           "expr": "- sum (rate (container_network_transmit_bytes_total{rkt_container_name!=\"\",kubernetes_io_hostname=~\"^$Node$\"}[1m])) by (kubernetes_io_hostname, rkt_container_name)",
           "hide": false,
           "interval": "10s",
@@ -1519,7 +1519,7 @@
     },
     {
       "collapsed": false,
-      "datasource": "Prometheus",
+      "datasource": "VM",
       "gridPos": {
         "h": 1,
         "w": 24,
@@ -1530,7 +1530,7 @@
       "panels": [],
       "targets": [
         {
-          "datasource": "Prometheus",
+          "datasource": "VM",
           "refId": "A"
         }
       ],
@@ -1542,7 +1542,7 @@
       "bars": false,
       "dashLength": 10,
       "dashes": false,
-      "datasource": "Prometheus",
+      "datasource": "VM",
       "decimals": 2,
       "editable": true,
       "error": false,
@@ -1590,7 +1590,7 @@
       "steppedLine": false,
       "targets": [
         {
-          "datasource": "Prometheus",
+          "datasource": "VM",
           "expr": "sum (rate (container_network_receive_bytes_total{id!=\"/\",kubernetes_io_hostname=~\"^$Node$\"}[1m])) by (id)",
           "interval": "10s",
           "intervalFactor": 1,
@@ -1600,7 +1600,7 @@
           "step": 10
         },
         {
-          "datasource": "Prometheus",
+          "datasource": "VM",
           "expr": "- sum (rate (container_network_transmit_bytes_total{id!=\"/\",kubernetes_io_hostname=~\"^$Node$\"}[1m])) by (id)",
           "interval": "10s",
           "intervalFactor": 1,
@@ -1656,7 +1656,7 @@
           "text": "All",
           "value": "$__all"
         },
-        "datasource": "Prometheus",
+        "datasource": "VM",
         "definition": "",
         "hide": 0,
         "includeAll": true,
@@ -1665,7 +1665,7 @@
         "options": [],
         "query": {
           "query": "label_values(kubernetes_io_hostname)",
-          "refId": "Prometheus-Node-Variable-Query"
+          "refId": "VM-Node-Variable-Query"
         },
         "refresh": 1,
         "regex": "",

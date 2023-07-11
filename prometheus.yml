@@ -2,10 +2,11 @@ global:
   scrape_interval: 15s
 scrape_configs:
 - job_name: cadvisor
+  honor_timestamps: false
   static_configs:
   - targets:
-    - cadvisorb:8081
+    - cadvisor:8081
 - job_name: vmetrics
   static_configs:
   - targets:
-    - localhost:8428
+    - victoriametrics:8428

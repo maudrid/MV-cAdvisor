@@ -3,11 +3,11 @@ configs:
     file: ./prometheus.yml
 
 services:
-  cadvisorb:
+  cadvisor:
     command: 
       - "--port=8081"
       - "--housekeeping_interval=10s"
-      - "--docker_only=true"
+      #- "--docker_only=true"
       - "--disable_metrics=percpu,sched,tcp,udp,disk,diskIO,hugetlb,referenced_memory,cpu_topology,resctrl"
       - "--store_container_labels=false"
     image: gcr.io/cadvisor/cadvisor:v0.47.1
@@ -28,6 +28,13 @@ services:
   victoriametrics:
     container_name: victoriametrics
     image: victoriametrics/victoria-metrics:v1.91.0
+    restart: unless-stopped
+    healthcheck:
+      test: wget --tries=1 --no-verbose --spider http://localhost:9090/-/ready || exit 1
+      interval: 15s
+      start_period: 5m
+      timeout: 20s
+      retries: 3
     ports:
       - 8428:8428
       - 8089:8089
@@ -37,6 +44,7 @@ services:
       - 4242:4242
     volumes:
       - ./vmdata:/storage
+      - /var/run/docker.sock:/var/run/docker.sock:ro
     configs:
       - source: prometheus
         target: /etc/prometheus/prometheus.yml
@@ -47,32 +55,6 @@ services:
       - "--httpListenAddr=:8428"
       - "--influxListenAddr=:8089"
       - "--promscrape.config=/etc/prometheus/prometheus.yml"
-      - "--search.disableCache"
-
-  prometheus:
-    container_name: prometheus
-    image: prom/prometheus:v2.43.0
-    restart: unless-stopped
-    user: root
-    healthcheck:
-      test: wget --tries=1 --no-verbose --spider http://localhost:9090/-/ready || exit 1
-      interval: 15s
-      start_period: 5m
-      timeout: 20s
-      retries: 3
-    configs:
-      - source: prometheus
-        target: /etc/prometheus/prometheus.yml
-    volumes:
-      - ./data:/prometheus
-      - /var/run/docker.sock:/var/run/docker.sock:ro
-    command:
-      - "--config.file"
-      - "/etc/prometheus/prometheus.yml"
-      - "--storage.tsdb.path"
-      - "/prometheus"
-    ports:
-      - 9090:9090
 
   grafana:
     container_name: grafana
@@ -94,11 +76,3 @@ services:
     restart: unless-stopped
     ports:
       - 3000:3000
-
-#! Some things to track data for
-  filler:
-    image: alpine:latest
-    command: tail -f
-    deploy:
-      mode: replicated
-      replicas: 10
